@@ -7,7 +7,7 @@ function App() {
 
 	useEffect(() => {
 		// fetch(process.env.REACT_APP_BACKEND_URL)
-    fetch('https://frontend-52pwvyjsxq-uc.a.run.app/')
+    fetch('https://backend-52pwvyjsxq-uc.a.run.app/')
 		 .then((res) => res.json())
       		 .then((result) => setData(result))
       		 .catch(console.log);
