@@ -17,13 +17,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        env:
-          REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
-        with:
-          node-version: ${{ matrix.node-version }}
-
       - name: Docker Login
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
@@ -38,6 +31,8 @@ jobs:
         run: | 
           docker build -t ${{ secrets.ARTIFACT_REGISTRY }}/frontend:latest .
           docker push ${{ secrets.ARTIFACT_REGISTRY }}/frontend:latest
+        env:
+          REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
 
   Deploy:
     needs: Build
